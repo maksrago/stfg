@@ -14,7 +14,6 @@ app = Flask(__name__)
 cache = Cache(config={"CACHE_TYPE": "simple"})
 cache.init_app(app)
 
-
 @app.route("/feed/<req_type>")
 @cache.cached(timeout=540)
 def rss(req_type):

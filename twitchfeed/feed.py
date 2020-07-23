@@ -30,13 +30,19 @@ def parse_feed(helix):
             start_date = start_date.replace(tzinfo=datetime.timezone.utc)
             start_date = start_date.astimezone()
 
-            title = "{}".format(stream["title"])
+            # \/ old title format \/
+            # title = "{}".format(stream["title"])
+            title = "{}".format(stream["user_name"]) + " - {}".format(stream["title"])
+            
             description = "{} is playing '{}'".format(stream["user_name"], helix.game_dict[stream["game_id"]])
 
             """ add the start time of the stream as a parameter
             this is necessary because many rss readers identify feed entries by their content url
             without this new streams of the same streamer wouldn"t get recognized as new feed entries """
-            url = "https://www.twitch.tv/" + stream["user_name"] + "?started=" + str(start_date).replace(" ", "_")
+            # \/ Old formatting for stream going live \/
+            # url = "https://www.twitch.tv/" + stream["user_name"] + "?started=" + str(start_date).replace(" ", "_")
+
+            url = "https://www.twitch.tv/" + stream["user_name"]
 
             # add feed entry
             fe = fg.add_entry()
